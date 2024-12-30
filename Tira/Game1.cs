@@ -6,9 +6,11 @@ namespace Tira
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-
+        public static GraphicsDeviceManager Graphics { get; private set; }
         public static Game1 Instance { get; set; }
+        public Camera Camera { get; private set; } = new Camera();
+
+
 
         public static SpriteBatch SpriteBatch { get; set; }
 
@@ -19,9 +21,16 @@ namespace Tira
 
             Instance = this;
 
-            _graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            GraphicsConfig.SCREEN_WIDTH = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            GraphicsConfig.SCREEN_HEIGHT = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            GraphicsConfig.FULLSCREEN = true;
+            GraphicsConfig.VSYNC = true;
+            GraphicsConfig.FRAMERATE = 60;
             IsMouseVisible = true;
+            GraphicsConfig.Apply();
         }
 
         protected override void Initialize()
@@ -36,6 +45,10 @@ namespace Tira
             WorldManager = new WorldManager();
 
             WorldManager.Start(new World());
+
+            Camera.Zoom = 4;
+
+            Camera.Position -= new Vector2(GraphicsConfig.SCREEN_WIDTH / 4, GraphicsConfig.SCREEN_HEIGHT / 4) / 2;
         }
 
         protected override void Update(GameTime gameTime)
@@ -43,13 +56,16 @@ namespace Tira
             base.Update(gameTime);
 
             WorldManager.Update();
+
+            Camera.Update();
+
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null);
+            SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.Matrix);
 
             WorldManager.Draw();
 
