@@ -7,12 +7,18 @@ namespace Tira
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+
+        public static Game1 Instance { get; set; }
+
+        public static SpriteBatch SpriteBatch { get; set; }
 
         private WorldManager WorldManager;
 
         public Game1()
         {
+
+            Instance = this;
+
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -25,7 +31,7 @@ namespace Tira
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             WorldManager = new WorldManager();
 
@@ -43,7 +49,11 @@ namespace Tira
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null);
+
             WorldManager.Draw();
+
+            SpriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -21,6 +21,7 @@ public class TileMap
     public void AddTile(Vector2 coords, Tile tile)
     {
         Tiles.Add(coords, tile);
+        tile.Start();
     }
 
     public void Draw()

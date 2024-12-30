@@ -10,6 +10,15 @@ public class Tile : Entity
 {
     public Tile(string name)
     {
-        Name = name;
+        Id.Name = name;
     }
+
+    public override void Start()
+    {
+        Sprite sprite = new Sprite("tile/" + Id.Name);
+        AddComponent(sprite);
+
+        base.Start();
+    }
+
 }

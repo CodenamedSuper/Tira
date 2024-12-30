@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -20,6 +21,13 @@ public class World
     {
         TileMap = new TileMap(TileSize);
 
+        PlaceTile(Vector2.Zero, Tiles.GRASSLAND());
+
+    }
+
+    public void PlaceTile(Vector2 coords, Tile tile)
+    {
+        TileMap.AddTile(coords, tile);
     }
 
     public void Update()
