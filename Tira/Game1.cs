@@ -48,7 +48,7 @@ namespace Tira
 
             Camera.Zoom = 4;
 
-            Camera.Position -= new Vector2(GraphicsConfig.SCREEN_WIDTH / 4, GraphicsConfig.SCREEN_HEIGHT / 4) / 2;
+           // Camera.Position -= new Vector2(GraphicsConfig.SCREEN_WIDTH / 4, GraphicsConfig.SCREEN_HEIGHT / 4) / 2;
         }
 
         protected override void Update(GameTime gameTime)

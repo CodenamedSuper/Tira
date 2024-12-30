@@ -50,7 +50,6 @@ public class Sprite : Component
 
     public override void Draw()
     {
-        Debug.WriteLine(Parent.Scale);
         Game1.SpriteBatch.Draw(texture2d, Parent.Position + Offset, new Rectangle((int)Coordinates.X, (int)Coordinates.Y, texture2d.Width, texture2d.Height), Color, Parent.Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Parent.Scale, Effect, (Parent.Layer + LayerOffset) * 0.001f);
     }
 }

@@ -21,8 +21,22 @@ public class World
     {
         TileMap = new TileMap(TileSize);
 
-        PlaceTile(Vector2.Zero, Tiles.GRASSLAND());
+        PlaceTiles(new Vector2(1, 1), new Vector2(25, 11), Tiles.GRASSLAND());
 
+    }
+
+    public void PlaceTiles(Vector2 start, Vector2 end, Tile tile)
+    {
+        Vector2 coords = start;
+
+        for(int i = 0; i < end.X + 1; i++)
+        {
+            for (int j = 0; j < end.Y + 1; j++)
+            {
+                coords = start + new Vector2(i, j);
+                PlaceTile(coords, Tiles.GRASSLAND());
+            }
+        }
     }
 
     public void PlaceTile(Vector2 coords, Tile tile)
