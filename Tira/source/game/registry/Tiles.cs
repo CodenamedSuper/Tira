@@ -10,7 +10,7 @@ public class Tiles
 {
     public static Dictionary<Id, Func<Tile>> List = new Dictionary<Id, Func<Tile>>();
 
-    public static readonly Func<Tile> GRASSLAND = Register("grassland");
+    public static readonly Func<Tile> GRASS = Register("grass");
 
     public static Func<Tile> Register(string name)
     {

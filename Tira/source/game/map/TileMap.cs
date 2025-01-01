@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +21,34 @@ public class TileMap
 
     public void AddTile(Vector2 coords, Tile tile)
     {
-        tile.Position = new Vector2(coords.X, coords.Y) * new Vector2(TileSize.X - TileSize.X / 4.4f, TileSize.Y);
-        if(coords.X % 2 == 0)
-        {
-            tile.Position = new Vector2(tile.Position.X, tile.Position.Y + TileSize.Y / 2);
+        coords = Vector2.Round(coords);
 
+        float xStep = TileSize.X * 0.75f; 
+        float yStep = TileSize.Y;        
+        float halfHeight = TileSize.Y / 2f;
+
+        float posX = coords.X * xStep;
+        float posY = coords.Y * yStep;
+
+        if (coords.X % 2 != 0)
+        {
+            posY += halfHeight; 
         }
-        Tiles.Add(coords, tile);
+
+        tile.Position = new Vector2(posX, posY);
+
+        if(Tiles.ContainsKey(coords))
+        {
+            Tiles[coords] = tile;
+        }
+        else
+        {
+            Tiles.Add(coords, tile);
+        }
+
         tile.Start();
     }
+
 
     public void Draw()
     {

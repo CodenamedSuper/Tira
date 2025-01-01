@@ -8,13 +8,13 @@ namespace Tira
     {
         public static GraphicsDeviceManager Graphics { get; private set; }
         public static Game1 Instance { get; set; }
-        public Camera Camera { get; private set; } = new Camera();
+        public static Camera Camera { get; private set; } = new Camera();
 
-
+        public Player Player;
 
         public static SpriteBatch SpriteBatch { get; set; }
 
-        private WorldManager WorldManager;
+        public static WorldManager WorldManager;
 
         public Game1()
         {
@@ -26,7 +26,7 @@ namespace Tira
 
             GraphicsConfig.SCREEN_WIDTH = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             GraphicsConfig.SCREEN_HEIGHT = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            GraphicsConfig.FULLSCREEN = true;
+            GraphicsConfig.FULLSCREEN = false;
             GraphicsConfig.VSYNC = true;
             GraphicsConfig.FRAMERATE = 60;
             IsMouseVisible = true;
@@ -36,6 +36,9 @@ namespace Tira
         protected override void Initialize()
         {
             base.Initialize();
+
+            Input.Initialize();
+
         }
 
         protected override void LoadContent()
@@ -45,6 +48,8 @@ namespace Tira
             WorldManager = new WorldManager();
 
             WorldManager.Start(new World());
+
+            Player = new Player(); Player.Start();
 
             Camera.Zoom = 4;
 
@@ -57,6 +62,10 @@ namespace Tira
 
             WorldManager.Update();
 
+            Player.Update();
+
+            Input.Update();
+
             Camera.Update();
 
         }
@@ -68,6 +77,8 @@ namespace Tira
             SpriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.Matrix);
 
             WorldManager.Draw();
+
+            Player.Draw();
 
             SpriteBatch.End();
 
