@@ -23,7 +23,7 @@ public class World
         TileMap = new TileMap(TileSize);
         BitMap = new BitMap(TileSize);
 
-        PlaceTiles(new Vector2(0, 0), new Vector2(26, 12), Tiles.GRASS());
+        PlaceTiles(new Vector2(0, 0), new Vector2(29, 13), Tiles.GRASS());
 
     }
 
@@ -95,6 +95,28 @@ public class World
 
         return new Vector2(hexX, hexY);
     }
+
+    public Bit Up(Bit bit)
+    {
+        if (BitMap.Bits.ContainsKey(ToCoordinates(bit.Position)) && 
+            BitMap.Bits.ContainsKey(ToCoordinates(bit.Position) + new Vector2(0, -1)))
+        {
+            return BitMap.Bits[(bit.Position) - new Vector2(0, 1)];
+        }
+
+        return null;
+    }
+    public Bit Down(Bit bit)
+    {
+        if (BitMap.Bits.ContainsKey(ToCoordinates(bit.Position)) &&
+            BitMap.Bits.ContainsKey(ToCoordinates(bit.Position) + new Vector2(0, 1)))
+        {
+            return BitMap.Bits[(bit.Position) - new Vector2(0, 1)];
+        }
+
+        return null;
+    }
+
     public void Update()
     {
         BitMap.Update();
