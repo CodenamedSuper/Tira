@@ -30,7 +30,7 @@ public class Sprite : Component
         Path = path;
 
         FileStream fileStream = new FileStream("assets/sprites/" + path + ".png", FileMode.Open, FileAccess.Read);
-        texture2d = Texture2D.FromStream(Game1.Instance.GraphicsDevice, fileStream);
+        texture2d = Texture2D.FromStream(Main.Instance.GraphicsDevice, fileStream);
         fileStream.Close();
 
         Size = new Vector2(texture2d.Width, texture2d.Height);
@@ -41,7 +41,7 @@ public class Sprite : Component
         Path = path;
 
         FileStream fileStream = new FileStream(path + ".png", FileMode.Open, FileAccess.Read);
-        texture2d = Texture2D.FromStream(Game1.Instance.GraphicsDevice, fileStream);
+        texture2d = Texture2D.FromStream(Main.Instance.GraphicsDevice, fileStream);
         fileStream.Close();
 
         Size = new Vector2(texture2d.Width, texture2d.Height);
@@ -50,6 +50,6 @@ public class Sprite : Component
 
     public override void Draw()
     {
-        Game1.SpriteBatch.Draw(texture2d, Parent.Position + Offset, new Rectangle((int)Coordinates.X, (int)Coordinates.Y, texture2d.Width, texture2d.Height), Color, Parent.Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Parent.Scale, Effect, (Parent.Layer + LayerOffset) * 0.001f);
+        Main.SpriteBatch.Draw(texture2d, Parent.Position + Offset, new Rectangle((int)Coordinates.X, (int)Coordinates.Y, texture2d.Width, texture2d.Height), Color, Parent.Rotation, new Vector2(texture2d.Width / 2, texture2d.Height / 2), Parent.Scale, Effect, (Parent.Layer + LayerOffset) * 0.001f);
     }
 }

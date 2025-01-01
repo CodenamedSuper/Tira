@@ -16,13 +16,13 @@ public class GraphicsConfig
 
     public static void Apply()
     {
-        Game1.Graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
-        Game1.Graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
+        Main.Graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
+        Main.Graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
 
-        Game1.Graphics.SynchronizeWithVerticalRetrace = VSYNC;
-        Game1.Graphics.IsFullScreen = FULLSCREEN;
-        Game1.Graphics.HardwareModeSwitch = false;
+        Main.Graphics.SynchronizeWithVerticalRetrace = VSYNC;
+        Main.Graphics.IsFullScreen = FULLSCREEN;
+        Main.Graphics.HardwareModeSwitch = false;
 
-        Game1.Graphics.ApplyChanges();
+        Main.Graphics.ApplyChanges();
     } 
 }

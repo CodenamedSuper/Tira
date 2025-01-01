@@ -1,3 +1,3 @@
 ﻿
-using var game = new Tira.Game1();
+using var game = new Tira.Main();
 game.Run();

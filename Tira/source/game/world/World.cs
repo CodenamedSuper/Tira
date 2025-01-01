@@ -11,7 +11,8 @@ namespace Tira;
 public class World
 {
     public Vector2 TileSize { get; set; } = new Vector2(22, 20);
-    private TileMap TileMap { get; set; } 
+    private TileMap TileMap { get; set; }
+    private BitMap BitMap { get; set; }
 
     public World()
     {
@@ -20,8 +21,9 @@ public class World
     public void Start()
     {
         TileMap = new TileMap(TileSize);
+        BitMap = new BitMap(TileSize);
 
-        PlaceTiles(new Vector2(1, 1), new Vector2(25, 11), Tiles.GRASS());
+        PlaceTiles(new Vector2(0, 0), new Vector2(26, 12), Tiles.GRASS());
 
     }
 
@@ -42,6 +44,11 @@ public class World
     public void PlaceTile(Vector2 coords, Tile tile)
     {
         TileMap.AddTile(coords, tile);
+    }
+
+    public void PlaceBit(Vector2 coords, Bit bit)
+    {
+        BitMap.AddBit(coords, bit);
     }
 
     public Vector2 Snap(Vector2 position)
@@ -90,11 +97,14 @@ public class World
     }
     public void Update()
     {
+        BitMap.Update();
 
     }
 
     public void Draw()
     {
         TileMap.Draw();
+        BitMap.Draw();
+
     }
 }

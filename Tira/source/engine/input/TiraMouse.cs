@@ -128,7 +128,7 @@ public class TiraMouse
     {
         Vector2 screenPosition = newMousePos;
         Vector2 screenCenter = new Vector2(GraphicsConfig.SCREEN_WIDTH / 2, GraphicsConfig.SCREEN_HEIGHT / 2);
-        return ((screenPosition - screenCenter) / Game1.Camera.Zoom) + Game1.Camera.Position;
+        return ((screenPosition - screenCenter) / Main.Camera.Zoom) + Main.Camera.Position;
     }
 
     public bool LeftClickRelease()

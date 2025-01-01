@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Tira
 {
-    public class Game1 : Game
+    public class Main : Game
     {
         public static GraphicsDeviceManager Graphics { get; private set; }
-        public static Game1 Instance { get; set; }
+        public static Main Instance { get; set; }
         public static Camera Camera { get; private set; } = new Camera();
 
         public Player Player;
@@ -16,7 +16,7 @@ namespace Tira
 
         public static WorldManager WorldManager;
 
-        public Game1()
+        public Main()
         {
 
             Instance = this;

@@ -15,7 +15,7 @@ public class Player : Entity
 
         AddComponent(new Sprite("tile/select"));
 
-        Layer = 2;
+        Layer = 1;
 
         base.Start();
     }
@@ -23,7 +23,7 @@ public class Player : Entity
     public override void Update()
     {
 
-        Position = Game1.WorldManager.World.Snap(Input.Mouse.GetWorldPosition() + new Vector2(GraphicsConfig.SCREEN_WIDTH / 2, GraphicsConfig.SCREEN_HEIGHT / 2) / Game1.Camera.Zoom);
+        Position = Main.WorldManager.World.Snap(Input.Mouse.GetWorldPosition() + new Vector2(GraphicsConfig.SCREEN_WIDTH / 2, GraphicsConfig.SCREEN_HEIGHT / 2) / Main.Camera.Zoom);
 
         if (Input.Mouse.LeftClick()) PlaceTile();
 
@@ -33,8 +33,8 @@ public class Player : Entity
 
     public void PlaceTile()
     {
-        World world = Game1.WorldManager.World;
+        World world = Main.WorldManager.World;
 
-        world.PlaceTile(world.ToCoordinates(Position), Tiles.GRASS());
+        world.PlaceBit(world.ToCoordinates(Position), Bits.TREE());
     }
 }
