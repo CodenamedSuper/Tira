@@ -17,7 +17,7 @@ public class Entity
 
     public float Rotation { get; set; } = 0;
 
-    public float Scale { get; set; } = 1;
+    public Vector2 Scale { get; set; } = Vector2.One;
 
     public float Layer { get; set; } = 0;
 

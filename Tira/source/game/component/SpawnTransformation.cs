@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,16 +15,16 @@ public class SpawnTransformation : Component
 
     public override void Start()
     {
-        Parent.Scale = 0;
+        Parent.Scale = new Vector2(1, 0);
 
         base.Start();
     }
 
     public override void Update()
     {
-        if(Parent.Scale < 1)
+        if(Parent.Scale.Y < Vector2.One.Y)
         {
-            Parent.Scale += Growth;
+            Parent.Scale += new Vector2(0, Growth);
         }
 
         base.Update();
