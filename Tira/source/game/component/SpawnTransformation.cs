@@ -15,7 +15,7 @@ public class SpawnTransformation : Component
 
     public override void Start()
     {
-        Parent.Scale = new Vector2(1, 0);
+        Parent.Scale = new Vector2(0, 0);
 
         base.Start();
     }
@@ -24,7 +24,7 @@ public class SpawnTransformation : Component
     {
         if(Parent.Scale.Y < Vector2.One.Y)
         {
-            Parent.Scale += new Vector2(0, Growth);
+            Parent.Scale += new Vector2(Growth, Growth);
         }
 
         base.Update();
