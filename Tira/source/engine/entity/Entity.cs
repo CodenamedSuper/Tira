@@ -31,6 +31,7 @@ public class Entity
     {
         Components.Add(component);
         component.SetParent(this);
+        component.Start();
     }
 
     public void RemoveComponent(Component component)

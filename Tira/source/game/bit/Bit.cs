@@ -17,7 +17,7 @@ public class Bit : Entity
         Layer = 2;
 
         Sprite sprite = new Sprite("bit/" + Id.Name); AddComponent(sprite);
-
+        SpawnTransformation spawnTransformation = new SpawnTransformation(); AddComponent(spawnTransformation);
         
 
 
