@@ -14,8 +14,8 @@ public class Creature : Entity
     }
     public override void Start()
     {
-        AnimatedSprite animatedSprite = new AnimatedSprite(Id.Name);
-        AddComponent(animatedSprite);
+        AnimatedSprite animatedSprite = new AnimatedSprite(Id.Name); AddComponent(animatedSprite);
+        TaskManager taskManager = new TaskManager(); AddComponent(taskManager);
 
         base.Start();
     }
