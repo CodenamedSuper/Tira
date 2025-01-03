@@ -16,8 +16,7 @@ public class Bit : Entity
     {
         Layer = 2;
 
-        AnimatedSprite sprite = new AnimatedSprite("bit/" + Id.Name); AddComponent(sprite);
-        sprite.AddAnimation("idle", new Animation(0, Main.WorldManager.World.TileSize, 3)); 
+        Sprite sprite = new Sprite("bit/" + Id.Name); AddComponent(sprite);
         SpawnTransformation spawnTransformation = new SpawnTransformation(); AddComponent(spawnTransformation);
         
 

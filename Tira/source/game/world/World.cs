@@ -13,6 +13,7 @@ public class World
     public Vector2 TileSize { get; set; } = new Vector2(22, 20);
     private TileMap TileMap { get; set; }
     private BitMap BitMap { get; set; }
+    public List<Creature> Creatures { get; set; } = new List<Creature>();
 
     public World()
     {
@@ -25,6 +26,17 @@ public class World
 
         PlaceTiles(new Vector2(0, 0), new Vector2(29, 13), Tiles.GRASS());
 
+    }
+
+    public void SpawnCreature(Vector2 coords, Creature creature)
+    {
+        Vector2 position = ToPosition(coords);
+
+        creature.Position = position;
+
+        Creatures.Add(creature);
+
+        creature.Start();
     }
 
     public void PlaceTiles(Vector2 start, Vector2 end, Tile tile)
@@ -96,6 +108,23 @@ public class World
         return new Vector2(hexX, hexY);
     }
 
+    public Vector2 ToPosition(Vector2 coords)
+    {
+        float xStep = TileSize.X * 0.75f;
+        float yStep = TileSize.Y;
+        float halfHeight = TileSize.Y / 2f;
+
+        float posX = coords.X * xStep;
+        float posY = coords.Y * yStep;
+
+        if (coords.X % 2 != 0)
+        {
+            posY += halfHeight;
+        }
+
+        return new Vector2(posX, posY);
+    }
+
     public Bit Up(Bit bit)
     {
         if (BitMap.Bits.ContainsKey(ToCoordinates(bit.Position)) && 
@@ -121,12 +150,22 @@ public class World
     {
         BitMap.Update();
 
+        foreach (Creature creature in Creatures)
+        {
+            creature.Update();
+        }
+
     }
 
     public void Draw()
     {
         TileMap.Draw();
         BitMap.Draw();
+
+        foreach(Creature creature in Creatures)
+        {
+            creature.Draw();
+        }
 
     }
 }
