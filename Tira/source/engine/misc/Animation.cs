@@ -16,14 +16,17 @@ public class Animation
 
     public int Size { get; set; } = 0;
 
-    public Animation(float x, int tileHeight, Sprite sprite)
+    public Vector2 TileSize { get; set; } = Vector2.Zero;
+
+    public Animation(float x, Vector2 tileSize, int size)
     {
-        Size = sprite.texture2d.Height / tileHeight;
+        TileSize = tileSize;
+        Size = size;
         Frames = new Vector2[Size];
 
         for(int i = 0; i < Size; i++)
         {
-            Frames[i] = new Vector2(x, i * tileHeight);
+            Frames[i] = new Vector2(x, i * TileSize.Y);
         }
     }
 }
