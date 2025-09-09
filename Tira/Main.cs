@@ -6,60 +6,64 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tira
+namespace Tira;
+
+public class Main
 {
-    public class Main
+
+    public static readonly int SCREEN_WIDTH = 800;
+    public static readonly int SCREEN_HEIGHT = 450;
+    public static readonly string GAME_NAME = "Tira";
+    public static readonly int FPS = 60;
+    public static readonly Color BACKGROUND_COLOR = new Color(100, 149, 237);
+    public static readonly int TILE_SIZE = 16;
+    public static readonly int ZOOM = 3;
+
+    public static Camera2D Camera = new Camera2D();
+
+    public static GameManager GameManager { get; set; } = new GameManager();
+
+    public Main()
     {
 
-        public static readonly int SCREEN_WIDTH = 800;
-        public static readonly int SCREEN_HEIGHT = 450;
-        public static readonly string GAME_NAME = "Tira";
-        public static readonly int FPS = 60;
-        public static readonly Color BACKGROUND_COLOR = new Color(100, 149, 237);
-        public static readonly int TILE_SIZE = 16;
-        public static readonly int ZOOM = 3;
+        Raylib.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_NAME);
+        Raylib.SetTargetFPS(FPS);
 
-        public static Camera2D Camera = new Camera2D();
+        Start();
 
-        public Main()
+        while (!Raylib.WindowShouldClose())
         {
+            Update(Raylib.GetFrameTime());
 
-            Raylib.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_NAME);
-            Raylib.SetTargetFPS(FPS);
+            Raylib.BeginDrawing();
 
-            Start();
+            Draw();
 
-            while (!Raylib.WindowShouldClose())
-            {
-                Update(Raylib.GetFrameTime());
-
-                Raylib.BeginDrawing();
-
-                Draw();
-
-                Raylib.EndDrawing();
-            }
-
-            Raylib.CloseWindow();
+            Raylib.EndDrawing();
         }
 
-        public void Start()
-        {
-            Camera.Zoom = ZOOM;
-            Camera.Target = -new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT) / (2 * Camera.Zoom);
-        }
-        public void Update(float gameTime)
-        {
-        }
-        public void Draw()
-        {
-            Raylib.ClearBackground(BACKGROUND_COLOR);
+        Raylib.CloseWindow();
+    }
 
-            Raylib.BeginMode2D(Camera);
+    public void Start()
+    {
+        Camera.Zoom = ZOOM;
+        Camera.Target = -new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT) / (2 * Camera.Zoom);
 
+        GameManager.Start();
+    }
+    public void Update(float gameTime)
+    {
+        GameManager.Update();
+    }
+    public void Draw()
+    {
+        Raylib.ClearBackground(BACKGROUND_COLOR);
 
+        Raylib.BeginMode2D(Camera);
 
-            Raylib.EndMode2D();
-        }
+        GameManager.Draw();
+
+        Raylib.EndMode2D();
     }
 }
