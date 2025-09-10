@@ -17,7 +17,7 @@ public class Main
     public static readonly int FPS = 60;
     public static readonly Color BACKGROUND_COLOR = new Color(100, 149, 237);
     public static readonly int TILE_SIZE = 16;
-    public static readonly int ZOOM = 3;
+    public static readonly int ZOOM = 4;
 
     public static Camera2D Camera = new Camera2D();
 

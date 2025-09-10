@@ -8,5 +8,5 @@ namespace Tira;
 
 public class Registries
 {
-
+    public static readonly Registry<Func<Tile>> TILES = new Registry<Func<Tile>>(); 
 }
