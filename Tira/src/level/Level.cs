@@ -8,16 +8,17 @@ namespace Tira;
 
 public class Level
 {
+    public Thing Thing = new Thing("thing");
     public void Start()
     {
-
+        Thing.Start();
     }
     public void Update()
     {
-
+        Thing.Update();
     }
     public void Draw()
     {
-
+        Thing.Draw();
     }
 }

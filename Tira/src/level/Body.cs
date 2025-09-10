@@ -10,6 +10,10 @@ public class Body
 {
     public string ID { get; set; } = string.Empty;
     public List<Component> Components { get; set; } = new List<Component>();
+    public Body(string id)
+    {
+        ID = id;
+    }
     public virtual void Start()
     {
 
@@ -20,11 +24,11 @@ public class Body
         component.Start();
         Components.Add(component);
     }
-    public T GetComponent<T>() where T : Component
+    public T Get<T>() where T : Component
     {
         return Components.FirstOrDefault(component => component is T) as T;
     }
-    public bool HasComponent<T>() where T : Component
+    public bool Has<T>() where T : Component
     {
         foreach (Component component in Components)
         {
