@@ -9,27 +9,39 @@ namespace Tira;
 public class Level
 {
     public int Size { get; set; } = 13;
-
-    public Thing Thing = new Thing("thing");
     public TileMap TileMap { get; set; } = new TileMap();
+
+    public List<Entity> Entities { get; set; } = new List<Entity>();
     public void Start()
     {
         LevelGenerator.Generate(this);
 
-        Thing.Start();
+        SpawnCharacter(Coords.Center(), Characters.KING);
+
     }
     public void PlaceTile(Coords coords, Func<Tile> tile)
     {
         TileMap.Add(coords, tile());
     }
+    public void SpawnCharacter(Coords coords, Func<Character> character)
+    {
+        Character c = character();
+        c.Start();
+        c.Get<Transform>().Position = coords.ToPosition();
+        Entities.Add(c);
+    }
+    public void DespawnCharacter(Character character)
+    {
+        Entities.Remove(character);
+    }
     public void Update()
     {
-        Thing.Update();
+        Entities.ForEach(entity => entity.Update());
     }
     public void Draw()
     {
         TileMap.Draw();
 
-        Thing.Draw();
+        Entities.ForEach(entity => entity.Draw());
     }
 }
